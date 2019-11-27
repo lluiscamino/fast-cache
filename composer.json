@@ -2,7 +2,7 @@
   "name": "lluiscamino/fast-cache",
   "description": "Simple caching system for PHP applications",
   "type": "library",
-  "license": "MIT License",
+  "license": "MIT",
   "minimum-stability": "dev",
   "require": {}
 }
