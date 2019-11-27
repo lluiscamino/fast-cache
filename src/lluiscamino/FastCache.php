@@ -15,7 +15,7 @@ class FastCache {
      * @var bool Include comment if the page is loaded from cache.
      */
     public static $announce = true;
-    private $file;
+    private $dir;
     private $cache;
     private $time;
 
@@ -24,15 +24,15 @@ class FastCache {
      * @param int $time Lifetime of the cache file (in seconds).
      * @param string|null $file File (file.php) that identifies the page being cached. Leave blank to automatically
      * select the file from which the object is being created.
+     * @param string $dir Subdirectory in which the cache file will be stored.
      */
-    public function __construct(int $time, string $file = null) {
+    public function __construct(int $time, string $file = null, string $dir = '') {
+        $this->dir = $dir;
         if ($file === null) {
             $temp = explode('/', $_SERVER['SCRIPT_NAME']);
-            $this->file = end($temp);
-        } else {
-            $this->file = $file;
+            $file = end($temp);
         }
-        $this->cache = self::$path . '/' . substr_replace($this->file, '', -4) . '.html';
+        $this->cache = self::$path . '/' . $this->dir . '/' . substr_replace($file, '', -4) . '.html';
         $this->time = $time;
     }
 
@@ -52,8 +52,8 @@ class FastCache {
      * Call at the end of the file.
      */
     public function end(): void {
-        if (!is_dir(self::$path)) {
-            mkdir(self::$path, 0777, true);
+        if (!is_dir(self::$path . '/' . $this->dir)) {
+            mkdir(self::$path . '/' . $this->dir, 0777, true);
         }
         $cacheFile = fopen($this->cache, 'w');
         fwrite($cacheFile, ob_get_contents());
