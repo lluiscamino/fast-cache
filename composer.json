@@ -4,5 +4,8 @@
   "type": "library",
   "license": "MIT",
   "minimum-stability": "stable",
-  "require": {}
+  "require": {},
+   "psr-4": {
+        "lluiscamino\\": "src/"
+    }
 }
