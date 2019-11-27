@@ -1,0 +1,8 @@
+{
+  "name": "lluiscamino/fast-cache",
+  "description": "Simple caching system for PHP applications",
+  "type": "library",
+  "license": "MIT License",
+  "minimum-stability": "dev",
+  "require": {}
+}
