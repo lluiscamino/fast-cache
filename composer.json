@@ -3,6 +3,6 @@
   "description": "Simple caching system for PHP applications",
   "type": "library",
   "license": "MIT",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {}
 }
