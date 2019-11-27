@@ -3,6 +3,11 @@
   "description": "Simple caching system for PHP applications",
   "type": "library",
   "license": "MIT",
-  "minimum-stability": "dev",
-  "require": {}
+  "minimum-stability": "stable",
+  "require": {},
+  "autoload": {
+    "psr-0": {
+      "lluiscamino\\": "src/"
+    }
+  }
 }
