@@ -5,7 +5,7 @@
   "license": "MIT",
   "minimum-stability": "stable",
   "require": {},
-   "psr-4": {
-        "lluiscamino\\": "src/"
-    }
+  "autoload": {
+      "psr-4": { "": "src/" }
+  }
 }
