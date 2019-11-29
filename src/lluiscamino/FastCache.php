@@ -67,4 +67,8 @@ class FastCache {
         fclose($cacheFile);
         ob_end_flush();
     }
+
+    public function delete(): void {
+        unlink($this->cache);
+    }
 }
