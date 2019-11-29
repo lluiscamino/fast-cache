@@ -7,6 +7,11 @@ namespace lluiscamino;
 class FastCache {
 
     /**
+     * @var bool Disable caching.
+     */
+    public static $disabled = false;
+
+    /**
      * @var string Cache files directory path
      */
     public static $path = 'cache';
@@ -40,6 +45,7 @@ class FastCache {
      * Call at the beginning of the file.
      */
     public function start(): void {
+        if (self::$disabled) return;
         if (file_exists($this->cache) && (time() - $this->time) < ($cacheTime = filemtime($this->cache))) {
             if (self::$announce) echo '<!-- Serving cached file from ' . date('H:i:s', $cacheTime) . ' -->';
             readfile($this->cache);
@@ -52,6 +58,7 @@ class FastCache {
      * Call at the end of the file.
      */
     public function end(): void {
+        if (self::$disabled) return;
         if (!is_dir(self::$path . '/' . $this->dir)) {
             mkdir(self::$path . '/' . $this->dir, 0777, true);
         }
