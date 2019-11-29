@@ -68,6 +68,9 @@ class FastCache {
         ob_end_flush();
     }
 
+    /**
+     * Delete cached file.
+     */
     public function delete(): void {
         unlink($this->cache);
     }
