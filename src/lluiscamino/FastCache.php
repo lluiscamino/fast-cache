@@ -56,15 +56,18 @@ class FastCache {
 
     /**
      * Call at the end of the file.
+     * @param bool $save False to not save the content as a file.
      */
-    public function end(): void {
+    public function end(bool $save = true): void {
         if (self::$disabled) return;
-        if (!is_dir(self::$path . '/' . $this->dir)) {
-            mkdir(self::$path . '/' . $this->dir, 0777, true);
+        if ($save) {
+            if (!is_dir(self::$path . '/' . $this->dir)) {
+                mkdir(self::$path . '/' . $this->dir, 0777, true);
+            }
+            $cacheFile = fopen($this->cache, 'w');
+            fwrite($cacheFile, ob_get_contents());
+            fclose($cacheFile);
         }
-        $cacheFile = fopen($this->cache, 'w');
-        fwrite($cacheFile, ob_get_contents());
-        fclose($cacheFile);
         ob_end_flush();
     }
 
@@ -72,6 +75,6 @@ class FastCache {
      * Delete cached file.
      */
     public function delete(): void {
-        unlink($this->cache);
+        if (file_exists($this->cache)) unlink($this->cache);
     }
 }
